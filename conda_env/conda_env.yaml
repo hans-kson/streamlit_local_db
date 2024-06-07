@@ -1,0 +1,9 @@
+# conda env create -f conda_env.yaml
+name: streamlit_local_db
+channels:
+ - defaults
+dependencies:
+ - streamlit= 1.32.0
+ - pyodbc= 5.0.1 
+ - python= 3.12
+ - pip= 24.0 
