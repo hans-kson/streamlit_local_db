@@ -28,9 +28,22 @@ def run_query(query):
         cur.execute(query)
         return cur.fetchall()
 
-# change query as needed f.ex. table name
-rows = run_query("SELECT * from mytable;")
+# title
+st.header("Streamlit connecting with local ms sql server db app")
 
-# Print results.
-for row in rows:
-    st.write(f"{row[0]} has a :{row[1]}:")
+#some text describing app
+st.text("App that connects to a local db and shows entries in a table.")
+
+# Input bar 1
+num_records_to_see = st.number_input("Enter number entries you want to see", min_value=1, step=1)
+
+# change query as needed f.ex. table name
+# rows = run_query("SELECT * from mytable;")
+# rows = run_query("SELECT TOP(10)[name],[pet] FROM mytable;")
+rows = run_query(f"SELECT TOP({num_records_to_see})[name],[pet] FROM mytable;")
+
+
+# Print results on button press
+if st.button('See entries from top in table'):
+    for row in rows:
+        st.write(f"{row[0]} has a :{row[1]}:")
